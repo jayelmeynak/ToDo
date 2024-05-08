@@ -1,5 +1,6 @@
 package com.example.todosum.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,8 +16,19 @@ import com.example.todosum.databinding.FragmentShopItemBinding
 class ShopItemFragment : Fragment() {
     private lateinit var binding: FragmentShopItemBinding
     private lateinit var shopItemViewModel: ShopItemViewModel
+    private lateinit var onEditingFinishedListener: OnEditingFinishedListener
     private var screenMode: String = MODE_UNKNOWN
     private var shopItemId: Int = -1
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnEditingFinishedListener) {
+            onEditingFinishedListener = context
+        } else {
+            throw RuntimeException("Activity must implement OnEditingFinishedListener")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +64,7 @@ class ShopItemFragment : Fragment() {
             tilName.error = message
         }
         shopItemViewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+            onEditingFinishedListener.onEditingFinished()
         }
     }
 
@@ -130,6 +142,11 @@ class ShopItemFragment : Fragment() {
                 throw RuntimeException("Param shop item id is absent")
             }
         }
+    }
+
+    interface OnEditingFinishedListener {
+
+        fun onEditingFinished()
     }
 
 

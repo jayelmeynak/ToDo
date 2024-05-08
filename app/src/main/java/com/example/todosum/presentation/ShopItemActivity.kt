@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.todosum.R
 import com.example.todosum.databinding.ActivityShopItemBinding
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
     private lateinit var binding: ActivityShopItemBinding
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = -1
@@ -75,6 +75,10 @@ class ShopItemActivity : AppCompatActivity() {
 
 
         }
+    }
+
+    override fun onEditingFinished() {
+        finish()
     }
 
 }
