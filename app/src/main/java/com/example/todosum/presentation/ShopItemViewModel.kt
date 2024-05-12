@@ -1,17 +1,18 @@
 package com.example.todosum.presentation
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.todosum.data.ShopListRepositoryImpl
 import com.example.todosum.domain.AddShopItemUseCase
 import com.example.todosum.domain.EditShopItemUseCase
 import com.example.todosum.domain.GetShopItemUseCase
 import com.example.todosum.domain.ShopItem
 
-class ShopItemViewModel : ViewModel() {
+class ShopItemViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = ShopListRepositoryImpl
+    private val repository = ShopListRepositoryImpl(application)
 
     private val getShopItemUseCase = GetShopItemUseCase(repository)
     private val addShopItemUseCase = AddShopItemUseCase(repository)

@@ -1,15 +1,16 @@
 package com.example.todosum.presentation
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import com.example.todosum.data.ShopListRepositoryImpl
 import com.example.todosum.domain.DeleteShopItemUseCase
 import com.example.todosum.domain.EditShopItemUseCase
 import com.example.todosum.domain.GetShopListUseCase
 import com.example.todosum.domain.ShopItem
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = ShopListRepositoryImpl
+    private val repository = ShopListRepositoryImpl(application)
 
     private val getShopListUseCase = GetShopListUseCase(repository)
     private val deleteShopItemUseCase = DeleteShopItemUseCase(repository)

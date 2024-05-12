@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.todosum.R
 import com.example.todosum.databinding.FragmentShopItemBinding
+import com.example.todosum.domain.ShopItem
 
 
 class ShopItemFragment : Fragment() {
@@ -18,7 +19,7 @@ class ShopItemFragment : Fragment() {
     private lateinit var shopItemViewModel: ShopItemViewModel
     private lateinit var onEditingFinishedListener: OnEditingFinishedListener
     private var screenMode: String = MODE_UNKNOWN
-    private var shopItemId: Int = -1
+    private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
